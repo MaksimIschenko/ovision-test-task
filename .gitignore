@@ -2,5 +2,3 @@ __pycache__/
 .idea/
 .pytest_cache/
 .venv/
-.env
-.env-non-dev
