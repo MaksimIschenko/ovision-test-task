@@ -1,1 +1,1 @@
-- [Интерактивная документация Swagger UI](https://maksimischenko.github.io/ovision-test-task/blob/main/docs/index.html)
+- [Интерактивная документация Swagger UI](https://maksimischenko.github.io/ovision-test-task/docs/index.html)
