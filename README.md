@@ -1,1 +1,1 @@
-- [Спецификация OpenAPI (JSON)](https://MaksimIschenko.github.io/Breadcrumbsovision-test-task/docs/openapi.json)
+- [Спецификация OpenAPI (JSON)](https://MaksimIschenko.github.io/ovision-test-task/docs/openapi.json)
