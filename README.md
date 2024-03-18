@@ -1,1 +1,1 @@
-- [Интерактивная документация Swagger UI](https://MaksimIschenko.github.io/ovision-test-task/docs/index.html)
+- [Спецификация OpenAPI (JSON)](https://MaksimIschenko.github.io/Breadcrumbsovision-test-task/docs/openapi.json)
