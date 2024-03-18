@@ -1,1 +1,1 @@
-- [Интерактивная документация Swagger UI]([index.html](./docs/index.html))
+- [Интерактивная документация Swagger UI]([index.html](docs/index.html))
