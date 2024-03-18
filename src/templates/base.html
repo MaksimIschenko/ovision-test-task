@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #343a40; /* Темный фон */
+            color: #ffffff; /* Светлый текст */
+        }
+        .navbar, .footer {
+            background-color: #212529; /* Еще более темный фон для шапки и подвала */
+        }
+        .navbar-brand {
+            font-weight: bold; /* Жирный текст */
+            color: #f8f9fa !important; /* Светлый цвет текста */
+        }
+        img.img-fluid {
+            border-radius: 15px; /* Скругление изображений */
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        h2 {
+            color: #f8f9fa; /* Светлый цвет заголовков */
+        }
+        .form-control-file {
+            color: #f8f9fa; /* Светлый цвет текста в форме */
+        }
+    </style>
+    <title>Тестовое задание</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Тестовое задание. Максим Ищенко</a>
+        </div>
+    </nav>
+    <hr>
+    <div class="container mt-4">
+        <h2 class="mb-4 text-center">Загрузка файла</h2>
+        <form action="http://localhost:8000/images/negative_image" method="post" enctype="multipart/form-data" class="mb-5">
+            <div class="form-group">
+                <label for="file">Выберите изображение для загрузки (PNG, JPG):</label>
+                <input type="file" id="file" name="file" accept="image/png, image/jpeg" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+
+        <h2 class="mb-4 text-center">Последние загруженные изображения</h2>
+        <div id="imagesList" class="row">
+            <!-- Изображения будут добавлены здесь -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector('form');
+        const fileInput = document.getElementById('file');
+
+    form.addEventListener('submit', function(e) {
+        if (!fileInput.value) {
+            e.preventDefault(); // Предотвратить отправку формы
+            alert('Пожалуйста, выберите файл для загрузки.');
+        }
+    });
+
+    function loadLastImages() {
+        fetch('http://localhost:8000/images/get_last_images')
+        .then(response => response.json())
+        .then(data => {
+            const imagesList = document.getElementById('imagesList');
+            imagesList.innerHTML = '';
+
+            data.forEach(imageData => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'col-md-4 d-flex flex-column';
+
+                // Создаем контейнер для оригинального изображения
+                const originalImageDiv = document.createElement('div');
+                originalImageDiv.className = 'mb-2'; // Добавляем небольшой отступ между изображениями
+
+                const originalImage = document.createElement('img');
+                originalImage.src = `data:image/jpeg;base64,${imageData.original}`;
+                originalImage.className = 'img-fluid';
+                originalImage.alt = 'Original image';
+
+                originalImageDiv.appendChild(originalImage);
+
+                // Создаем контейнер для негативного изображения
+                const negativeImageDiv = document.createElement('div');
+                negativeImageDiv.className = 'mt-auto'; // Выталкиваем негативное изображение вниз
+
+                const negativeImage = document.createElement('img');
+                negativeImage.src = `data:image/jpeg;base64,${imageData.negative}`;
+                negativeImage.className = 'img-fluid';
+                negativeImage.alt = 'Negative image';
+
+                negativeImageDiv.appendChild(negativeImage);
+
+                // Добавляем метки для изображений с выравниванием по центру
+                const originalLabel = document.createElement('p');
+                originalLabel.innerText = 'Оригинал';
+                originalLabel.className = 'text-center'; // Выравнивание текста по центру
+
+                const negativeLabel = document.createElement('p');
+                negativeLabel.innerText = 'Негатив';
+                negativeLabel.className = 'text-center'; // Выравнивание текста по центру
+
+                colDiv.append(originalLabel, originalImageDiv, negativeLabel, negativeImageDiv);
+                imagesList.appendChild(colDiv);
+            });
+        })
+        .catch(error => console.error('Ошибка:', error));
+    }
+
+    loadLastImages();
+    });
+    </script>
+
+
+    <!-- Optional JavaScript for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
