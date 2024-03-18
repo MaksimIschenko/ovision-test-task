@@ -1,1 +1,1 @@
-- [Спецификация OpenAPI (JSON)](https://MaksimIschenko.github.io/ovision-test-task/docs/openapi.json)
+
