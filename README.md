@@ -1,0 +1,1 @@
+- [Интерактивная документация Swagger UI](https://MaksimIschenko.github.io/ovision-test-task/docs/index.html)
