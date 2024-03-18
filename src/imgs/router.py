@@ -54,7 +54,7 @@ async def negative_image(session: AsyncSession = Depends(get_async_session),
     await session.commit()
 
     # Перенаправление на главную страницу
-    return RedirectResponse(url='http://localhost:8000', status_code=302)
+    return RedirectResponse(url='http://localhost:9999', status_code=302)
 
 
 @router.get("/get_last_images")

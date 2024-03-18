@@ -47,7 +47,7 @@
     <hr>
     <div class="container mt-4">
         <h2 class="mb-4 text-center">Загрузка файла</h2>
-        <form action="http://localhost:8000/images/negative_image" method="post" enctype="multipart/form-data" class="mb-5">
+        <form action="http://localhost:9999/images/negative_image" method="post" enctype="multipart/form-data" class="mb-5">
             <div class="form-group">
                 <label for="file">Выберите изображение для загрузки (PNG, JPG):</label>
                 <input type="file" id="file" name="file" accept="image/png, image/jpeg" class="form-control-file">
@@ -74,7 +74,7 @@
     });
 
     function loadLastImages() {
-        fetch('http://localhost:8000/images/get_last_images')
+        fetch('http://localhost:9999/images/get_last_images')
         .then(response => response.json())
         .then(data => {
             const imagesList = document.getElementById('imagesList');
